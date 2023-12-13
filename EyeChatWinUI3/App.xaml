@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application
+    x:Class="EyeChatWinUI3.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EyeChatWinUI3">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                
+                <!-- Other merged dictionaries here -->
+                <ResourceDictionary>
+                    
+                    
+                    <SolidColorBrush x:Key="WindowCaptionBackground">Green</SolidColorBrush>
+                    <SolidColorBrush x:Key="WindowCaptionBackgroundDisabled">LightGreen</SolidColorBrush>
+                    <SolidColorBrush x:Key="WindowCaptionForeground">Red</SolidColorBrush>
+                    <SolidColorBrush x:Key="WindowCaptionForegroundDisabled">Pink</SolidColorBrush>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            <!-- Other app resources here -->
+            <x:Double x:Key="GlobalFontSizeH">16</x:Double>
+            <x:Double x:Key="GlobalFontSizeH1">14</x:Double>
+            <x:Double x:Key="GlobalFontSizeH2">12</x:Double>
+            <x:Double x:Key="GlobalFontSizeH3">10</x:Double>
+            <x:Double x:Key="GlobalFontScaleSize">1</x:Double>
+            <Color x:Key="SystemAccentColor">#FF0078D4</Color>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

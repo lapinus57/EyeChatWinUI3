@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="EyeChatWinUI3.Views.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EyeChatWinUI3.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls" 
+    xmlns:primitives="using:CommunityToolkit.WinUI.UI.Controls.Primitives"
+    xmlns:labs="using:CommunityToolkit.Labs.WinUI" 
+    xmlns:localClass="using:EyeChatWinUI3.Class"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <localClass:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
+    </Page.Resources>
+
+
+    <ScrollViewer  >
+        <StackPanel Margin="20,0">
+           
+            <labs:SettingsExpander
+                Header="Général"
+                Description="Paramètre généreaux de l'application">
+            <labs:SettingsExpander.HeaderIcon>
+                <FontIcon Glyph="&#xE713;" />
+            </labs:SettingsExpander.HeaderIcon>
+                <labs:SettingsExpander.Items>
+                    <labs:SettingsCard Header="Identifiant PC">
+                        <labs:SettingsCard.Content>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Spacing="50">
+                                <TextBlock Text="Afficher l'identifiant PC" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </labs:SettingsCard.Content>
+                    </labs:SettingsCard>
+                    <labs:SettingsCard Header="Nom d'utilisateur windows">
+                        <labs:SettingsCard.Content>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Spacing="50">
+                                <TextBlock Text="Afficher l'identifiant PC" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </labs:SettingsCard.Content>
+                    </labs:SettingsCard>
+
+                </labs:SettingsExpander.Items>
+            </labs:SettingsExpander>
+
+        <labs:SettingsExpander
+                Header="Connection"
+                Description="Personnalisation de la connection">
+            <labs:SettingsExpander.HeaderIcon>
+                <FontIcon Glyph="&#xEC05;" />
+            </labs:SettingsExpander.HeaderIcon>
+                <labs:SettingsExpander.Items>
+                    
+                </labs:SettingsExpander.Items>
+            
+            
+        </labs:SettingsExpander>
+
+            <labs:SettingsExpander
+                    Header="Salle"
+                    Description="Personnalisation des salles">
+                <labs:SettingsExpander.HeaderIcon>
+                    <FontIcon Glyph="&#xE731;" />
+                </labs:SettingsExpander.HeaderIcon>
+                <labs:SettingsExpander.Items>
+                    
+                    <labs:SettingsCard ContentAlignment="Left" HorizontalContentAlignment="Stretch">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0" Spacing="10">
+                            <TextBlock Text="Salle d'attentes"  
+                                       FontSize="{StaticResource GlobalFontSizeH2}"
+                                       TextWrapping="Wrap"/>
+                            <TextBlock Text="Avant d'apporter toute modification, il est fortement recommandé de solliciter des conseils ou de consulter la page wiki sur GitHub afin de garantir le bon fonctionnement de la boîte de dialogue. Lorsque vous ajustez les données dans ce tableau, veillez à être attentif, car certaines modifications pourraient perturber son bon fonctionnement. Veuillez noter que toutes les modifications effectuées sur ce tableau seront automatiquement transmises à toutes les autres boîtes de dialogue. En conséquence, soyez particulièrement prudent lors de ces modifications." 
+                                       FontSize="{StaticResource GlobalFontSizeH2}"
+                                       TextWrapping="Wrap"/>
+
+                            <controls:DataGrid x:Name="WaitingRoomsDataGrid"
+                                           AutoGenerateColumns="False" ItemsSource="{Binding WaitingRooms}"
+                                           HorizontalAlignment="Stretch" 
+                                           FontSize="{StaticResource GlobalFontSizeH2}"
+                                              >
+                                <controls:DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="primitives:DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="{StaticResource GlobalFontSizeH2}"/>
+                                    </Style>
+                                </controls:DataGrid.ColumnHeaderStyle>
+                                <controls:DataGrid.Columns>
+                                    <controls:DataGridTextColumn Header="Titre de la Salle"
+                                                             Binding="{Binding WaitingRoomName}" Width="*"
+                                                             FontSize="{StaticResource GlobalFontSizeH2}"/>
+                                    <controls:DataGridTextColumn Header="Description de la salle"
+                                                             Binding="{Binding WaitingRoomDescription}" Width="*"
+                                                             FontSize="{StaticResource GlobalFontSizeH2}"/>
+                                    <controls:DataGridTextColumn Header="Nom de la salle"
+                                                             Binding="{Binding WaitingRoomTilte}" Width="*"
+                                                             FontSize="{StaticResource GlobalFontSizeH2}"/>
+                                    <controls:DataGridTemplateColumn Header="Supprimer">
+                                        <controls:DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Content="Supprimer" Click="DeleteWaitingRoomsButton_Click"/>
+                                            </DataTemplate>
+                                        </controls:DataGridTemplateColumn.CellTemplate>
+                                    </controls:DataGridTemplateColumn>
+                                </controls:DataGrid.Columns>
+                            </controls:DataGrid>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Button Content="Ajouter une ligne" FontSize="{StaticResource GlobalFontSizeH2}" Click="AddWaitingRoomsButton_Click"/>
+                                <Button Content="Sauvegarder et envoyer" FontSize="{StaticResource GlobalFontSizeH2}" Click="SaveWaitingRoomsButton_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </labs:SettingsCard>
+
+                    <labs:SettingsCard ContentAlignment="Left" HorizontalContentAlignment="Stretch">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0" Spacing="10">
+                            <TextBlock Text="Salle d'examens"  
+                    FontSize="{StaticResource GlobalFontSizeH2}"
+                    TextWrapping="Wrap"/>
+                            <TextBlock Text="Avant d'apporter toute modification, il est fortement recommandé de solliciter des conseils ou de consulter la page wiki sur GitHub afin de garantir le bon fonctionnement de la boîte de dialogue. Lorsque vous ajustez les données dans ce tableau, veillez à être attentif, car certaines modifications pourraient perturber son bon fonctionnement. Veuillez noter que toutes les modifications effectuées sur ce tableau seront automatiquement transmises à toutes les autres boîtes de dialogue. En conséquence, soyez particulièrement prudent lors de ces modifications." 
+                    FontSize="{StaticResource GlobalFontSizeH2}"
+                    TextWrapping="Wrap"/>
+
+                            <controls:DataGrid x:Name="ExamRoomsDataGrid"
+                        AutoGenerateColumns="False" ItemsSource="{Binding ExamRooms}"
+                        HorizontalAlignment="Stretch" 
+                        FontSize="{StaticResource GlobalFontSizeH2}"
+                           >
+                                <controls:DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="primitives:DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="{StaticResource GlobalFontSizeH2}"/>
+                                    </Style>
+                                </controls:DataGrid.ColumnHeaderStyle>
+                                <controls:DataGrid.Columns>
+                                    <controls:DataGridTextColumn Header="Titre de la Salle"
+                                          Binding="{Binding ExamRoomName}" Width="*"
+                                          FontSize="{StaticResource GlobalFontSizeH2}"/>
+                                    <controls:DataGridTextColumn Header="Description de la salle"
+                                          Binding="{Binding ExamRoomDescription}" Width="*"
+                                          FontSize="{StaticResource GlobalFontSizeH2}"/>
+                                    <controls:DataGridTemplateColumn Header="Supprimer">
+                                        <controls:DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Content="Supprimer" Click="DeleteExamRoomsButton_Click"/>
+                                            </DataTemplate>
+                                        </controls:DataGridTemplateColumn.CellTemplate>
+                                    </controls:DataGridTemplateColumn>
+                                </controls:DataGrid.Columns>
+                            </controls:DataGrid>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Button Content="Ajouter une ligne" FontSize="{StaticResource GlobalFontSizeH2}" Click="AddExamRoomsButton_Click"/>
+                                <Button Content="Sauvegarder et envoyer" FontSize="{StaticResource GlobalFontSizeH2}" Click="SaveExamRoomsButton_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </labs:SettingsCard>
+
+
+
+                </labs:SettingsExpander.Items>
+            </labs:SettingsExpander>
+
+            <labs:SettingsExpander
+                Header="Affichage"
+                Description="Personnalisation de l'affichage"
+                >
+            <labs:SettingsExpander.HeaderIcon>
+                <FontIcon Glyph="&#xE771;" />
+            </labs:SettingsExpander.HeaderIcon>
+
+                <labs:SettingsExpander.Items>
+                    <labs:SettingsCard Header="Thème" FontSize="{StaticResource GlobalFontSizeH1}">
+                        <labs:SettingsCard.Content>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Spacing="50">
+                                <ComboBox Width="200" SelectionChanged="ComboBox_SelectionChanged" x:Name="ComboBox_Theme" >
+                                    <ComboBoxItem Content="Clair"></ComboBoxItem>
+                                    <ComboBoxItem Content="Foncé"></ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+                        </labs:SettingsCard.Content>
+                    </labs:SettingsCard>
+                    <labs:SettingsCard Header="Taille d'affichage" FontSize="{StaticResource GlobalFontSizeH1}" >
+                        <labs:SettingsCard.Content>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Spacing="50">
+                                <Slider x:Name="Slidersize"  Minimum="0.8" Maximum="1.8" StepFrequency="0.10" ValueChanged="SliderSize_ValueChanged" />
+                            </StackPanel>
+                        </labs:SettingsCard.Content>
+                    </labs:SettingsCard>
+
+                </labs:SettingsExpander.Items>
+            </labs:SettingsExpander>
+        
+        
+        <labs:SettingsExpander
+                Header="Raccourcis clavier"
+                Description="Personnalisation des raccourcis clavier">
+            <labs:SettingsExpander.HeaderIcon>
+                <FontIcon Glyph="&#xE765;" />
+            </labs:SettingsExpander.HeaderIcon>
+            <labs:SettingsExpander.Items>
+                <labs:SettingsCard Header="Crtl + F9">
+                    <labs:SettingsCard.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Spacing="50">
+                            <ToggleSwitch></ToggleSwitch>
+                            <TextBlock Text="Fonction :" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <ComboBox Width="200"></ComboBox>
+
+                        </StackPanel>
+                    </labs:SettingsCard.Content>
+                </labs:SettingsCard>
+                
+                <labs:SettingsCard Header="Crtl + F10">
+                    <labs:SettingsCard.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Spacing="50">
+                            <ToggleSwitch></ToggleSwitch>
+                            <TextBlock Text="Fonction :" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <ComboBox Width="200"></ComboBox>
+
+                        </StackPanel>
+                    </labs:SettingsCard.Content>
+                </labs:SettingsCard>
+                
+                <labs:SettingsCard Header="Crtl + F11">
+                    <labs:SettingsCard.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Spacing="50">
+                            <ToggleSwitch></ToggleSwitch>
+                            <TextBlock Text="Fonction :" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <ComboBox Width="200"></ComboBox>
+
+                        </StackPanel>
+                    </labs:SettingsCard.Content>
+                </labs:SettingsCard>
+                
+                <labs:SettingsCard Header="Crtl + F12">
+                    <labs:SettingsCard.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Spacing="50">
+                            <ToggleSwitch></ToggleSwitch>
+                            <TextBlock Text="Fonction :" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <ComboBox Width="200"></ComboBox>
+
+                        </StackPanel>
+                    </labs:SettingsCard.Content>
+                </labs:SettingsCard>
+
+                <labs:SettingsCard Header="Maj + F9">
+                    <labs:SettingsCard.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Spacing="50">
+                            <ToggleSwitch></ToggleSwitch>
+                            <TextBlock Text="Fonction :" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <ComboBox Width="200"></ComboBox>
+
+                        </StackPanel>
+                    </labs:SettingsCard.Content>
+                </labs:SettingsCard>
+
+                <labs:SettingsCard Header="Maj + F10">
+                    <labs:SettingsCard.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Spacing="50">
+                            <ToggleSwitch></ToggleSwitch>
+                            <TextBlock Text="Fonction :" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <ComboBox Width="200"></ComboBox>
+
+                        </StackPanel>
+                    </labs:SettingsCard.Content>
+                </labs:SettingsCard>
+
+                <labs:SettingsCard Header="Maj + F11">
+                    <labs:SettingsCard.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Spacing="50">
+                            <ToggleSwitch></ToggleSwitch>
+                            <TextBlock Text="Fonction :" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <ComboBox Width="200"></ComboBox>
+
+                        </StackPanel>
+                    </labs:SettingsCard.Content>
+                </labs:SettingsCard>
+
+                <labs:SettingsCard Header="Maj + F12">
+                    <labs:SettingsCard.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0" Spacing="50">
+                            <ToggleSwitch></ToggleSwitch>
+                            <TextBlock Text="Fonction :" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            <ComboBox Width="200"></ComboBox>
+
+                        </StackPanel>
+                    </labs:SettingsCard.Content>
+                </labs:SettingsCard>
+
+
+            </labs:SettingsExpander.Items>
+        </labs:SettingsExpander>
+        <labs:SettingsExpander
+                Header="Liste d'examens"
+                Description="Personnalisation des examens">
+            <labs:SettingsExpander.HeaderIcon>
+                <FontIcon Glyph="&#xE82D;" />
+            </labs:SettingsExpander.HeaderIcon>
+                <labs:SettingsExpander.Items>
+                    <labs:SettingsCard ContentAlignment="Left" HorizontalContentAlignment="Stretch">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0" Spacing="10">
+                            <TextBlock Text="Salle d'examens"  
+                   FontSize="{StaticResource GlobalFontSizeH2}"
+                   TextWrapping="Wrap"/>
+                            <TextBlock Text="Soyez particulièrement prudent lors de ces modifications." 
+                   FontSize="{StaticResource GlobalFontSizeH2}"
+                   TextWrapping="Wrap"/>
+
+                            <controls:DataGrid x:Name="ExamListDataGrid"
+                           AutoGenerateColumns="False" ItemsSource="{Binding ExamLists}"
+                           HorizontalAlignment="Stretch" 
+                           FontSize="{StaticResource GlobalFontSizeH2}">
+                                <controls:DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="primitives:DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="{StaticResource GlobalFontSizeH2}"/>
+                                    </Style>
+                                </controls:DataGrid.ColumnHeaderStyle>
+                                <controls:DataGrid.Columns>
+                                    <controls:DataGridTextColumn Header="Id"
+                                                                 Binding="{Binding ExamID}" Width="*"
+                                                                 FontSize="{StaticResource GlobalFontSizeH2}"
+                                                                 IsReadOnly="True"/>
+                                    <controls:DataGridTextColumn Header="Nom"
+                                             Binding="{Binding ExamName}" Width="*"
+                                             FontSize="{StaticResource GlobalFontSizeH2}"/>
+                                    <controls:DataGridTextColumn Header="Description de la salle"
+                                             Binding="{Binding ExamCodeMSG}" Width="*"
+                                             FontSize="{StaticResource GlobalFontSizeH2}"/>
+                                    <!-- Ajout de la colonne de sélection de couleur -->
+                                    <controls:DataGridTemplateColumn Header="Couleur">
+                                        <controls:DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <DropDownButton AutomationProperties.Name="Color" CornerRadius="2">
+                                                    <DropDownButton.Content>
+                                                        <Border Width="20" Height="20" Margin="-6,-4,0,-4" CornerRadius="2">
+                                                            <Border.Background>
+                                                                <SolidColorBrush Color="{Binding ExamColor}" />
+                                                            </Border.Background>
+                                                        </Border>
+                                                    </DropDownButton.Content>
+                                                    <DropDownButton.Flyout>
+                                                        <Flyout Placement="BottomEdgeAlignedLeft">
+                                                            <ColorPicker Color="{Binding ExamColor, Mode=TwoWay}"/>
+                                                        </Flyout>
+                                                    </DropDownButton.Flyout>
+                                                </DropDownButton>
+                                            </DataTemplate>
+                                        </controls:DataGridTemplateColumn.CellTemplate>
+                                    </controls:DataGridTemplateColumn>
+
+                                    <controls:DataGridTemplateColumn Header="Supprimer">
+                                        <controls:DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Content="Supprimer" Click="DeleteExamListButton_Click"/>
+                                            </DataTemplate>
+                                        </controls:DataGridTemplateColumn.CellTemplate>
+                                    </controls:DataGridTemplateColumn>
+                                </controls:DataGrid.Columns>
+                            </controls:DataGrid>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Button Content="Ajouter une ligne" FontSize="{StaticResource GlobalFontSizeH2}" Click="AddExamListButton_Click"/>
+                                <Button Content="Sauvegarder et envoyer" FontSize="{StaticResource GlobalFontSizeH2}" Click="SaveExamListButton_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </labs:SettingsCard>
+
+                </labs:SettingsExpander.Items>
+        </labs:SettingsExpander>
+        <labs:SettingsExpander
+                Header="Messages rapide"
+                Description="Personnalisation des messages rapide">
+            <labs:SettingsExpander.HeaderIcon>
+                <FontIcon Glyph="&#xEA58;" />
+            </labs:SettingsExpander.HeaderIcon>
+            <labs:SettingsExpander.Items>
+                <labs:SettingsCard
+                    Header="Avant d'effectuer des modifications, nous vous conseillons vivement de demander des avis ou de consulter la page wiki sur GitHub pour assurer le bon fonctionnement de cette boîte de dialogue. Veuillez noter que ces modifications sont spécifiques à cette boîte de dialogue, mais elles pourraient également entraîner des dysfonctionnements dans d'autres boîtes de dialogue. Soyez prudent lors de vos ajustements.">
+
+                </labs:SettingsCard>
+
+                    <labs:SettingsCard ContentAlignment="Left" HorizontalContentAlignment="Stretch">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0" Spacing="10">
+                            <TextBlock Text="Avant d'apporter toute modification, il est fortement recommandé de solliciter des conseils ou de consulter la page wiki sur GitHub afin de garantir le bon fonctionnement de la boîte de dialogue. Lorsque vous ajustez les données dans ce tableau, veillez à être attentif, car certaines modifications pourraient perturber son bon fonctionnement. Veuillez noter que toutes les modifications effectuées sur ce tableau seront automatiquement transmises à toutes les autres boîtes de dialogue. En conséquence, soyez particulièrement prudent lors de ces modifications." 
+                    FontSize="{StaticResource GlobalFontSizeH2}"
+                    TextWrapping="Wrap"/>
+
+                            <controls:DataGrid x:Name="SpeedMessagesDataGrid"
+                                               AutoGenerateColumns="False" 
+                                               ItemsSource="{Binding SpeedMessages}"
+                                               HorizontalAlignment="Stretch" 
+                                               FontSize="{StaticResource GlobalFontSizeH2}"
+                                               >
+                                <controls:DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="primitives:DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="{StaticResource GlobalFontSizeH2}"/>
+                                    </Style>
+                                </controls:DataGrid.ColumnHeaderStyle>
+                                <controls:DataGrid.Columns>
+                                    <controls:DataGridTextColumn Header="Index"
+                                     Binding="{Binding Index}" Width="*" IsReadOnly="True"
+                                     FontSize="{StaticResource GlobalFontSizeH2}"/>
+                                    <controls:DataGridTextColumn Header="Titre"
+                                     Binding="{Binding Title}" Width="*"
+                                     FontSize="{StaticResource GlobalFontSizeH2}"/>
+                                    <controls:DataGridTextColumn Header="Destinataire"
+                                     Binding="{Binding Destinataire}" Width="*"
+                                     FontSize="{StaticResource GlobalFontSizeH2}"/>
+                                    <controls:DataGridTextColumn Header="Message"
+                                     Binding="{Binding Message}" Width="*"
+                                     FontSize="{StaticResource GlobalFontSizeH2}"/>
+                                    <controls:DataGridTextColumn Header="Options"
+                                     Binding="{Binding Options}" Width="*"
+                                     FontSize="{StaticResource GlobalFontSizeH2}"/>
+                                    <controls:DataGridTemplateColumn Header="Affiché">
+                                        <controls:DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ToggleSwitch IsOn="{Binding Load, Mode=TwoWay}" OnContent="Affiché" OffContent="Masqué"/>
+                                            </DataTemplate>
+                                        </controls:DataGridTemplateColumn.CellTemplate>
+                                    </controls:DataGridTemplateColumn>
+                                    <controls:DataGridTemplateColumn Header="Supprimer">
+                                        <controls:DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Content="Supprimer" Click="DeleteSpeedMessage_Click"/>
+                                            </DataTemplate>
+                                        </controls:DataGridTemplateColumn.CellTemplate>
+                                    </controls:DataGridTemplateColumn>
+                                </controls:DataGrid.Columns>
+                            </controls:DataGrid>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Button Content="Sauvegarder" FontSize="{StaticResource GlobalFontSizeH2}" Click="SaveSpeedMessagesButton_Click"/>
+                                <Button Content="Ajouter une ligne" FontSize="{StaticResource GlobalFontSizeH2}" Click="AddSpeedMessageButton_Click"/>
+                                </StackPanel>
+                        </StackPanel>
+                    </labs:SettingsCard>
+
+                </labs:SettingsExpander.Items>
+        </labs:SettingsExpander>
+        
+        <labs:SettingsExpander
+        Header="Planning"
+        Description="Personnalisation du planning des utilisateurs">
+            <labs:SettingsExpander.HeaderIcon>
+                <FontIcon Glyph="&#xE787;" />
+            </labs:SettingsExpander.HeaderIcon>
+
+                <labs:SettingsExpander.Items>
+                    <labs:SettingsCard Header=" Activer le mode plannig">
+                        <ToggleSwitch x:Name="SwitchPlanningMode"></ToggleSwitch>
+                    </labs:SettingsCard>
+
+                    <labs:SettingsCard IsEnabled="{Binding IsOn, ElementName=SwitchPlanningMode}">
+
+                        <controls:DataGrid>
+                            <controls:DataGrid.Columns>
+                                <controls:DataGridTextColumn Header="Nom" Binding="{Binding Nom}"/>
+                            </controls:DataGrid.Columns>
+                        </controls:DataGrid>
+                    </labs:SettingsCard>
+
+                </labs:SettingsExpander.Items>
+
+            </labs:SettingsExpander>
+        
+        
+        
+        
+        
+        <labs:SettingsExpander
+                Header="Fichiers"
+                Description="Personnalisation des dossiers et fichiers">
+            <labs:SettingsExpander.HeaderIcon>
+                <FontIcon Glyph="&#xE8B7;" />
+            </labs:SettingsExpander.HeaderIcon>
+        </labs:SettingsExpander>
+
+
+    </StackPanel>
+    </ScrollViewer>
+</Page>
